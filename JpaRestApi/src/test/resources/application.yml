@@ -10,10 +10,12 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
+#        sysout
 #        show_sql: true
         format_sql: true
 
 logging:
   level:
+#    logger
     org.hibernate.SQL: debug
 #    org.hibernate.type: trace
