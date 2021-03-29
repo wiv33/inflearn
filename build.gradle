@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.4'
+//    by error occurred
+//    add : apply false
+//    org.gradle.api.GradleException: Failed to resolve imported Maven boms: Cannot resolve external dependency org.springframework.boot:spring-boot-dependencies:2.4.4 because no repositories are defined.
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE' apply false
+    id 'java'
+}
+
+group = 'org.psawesome'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+allprojects {
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'io.projectreactor:reactor-test'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+}
+
+
