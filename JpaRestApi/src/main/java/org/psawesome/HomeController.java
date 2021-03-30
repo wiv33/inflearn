@@ -1,4 +1,4 @@
-package org.psawesome.page;
+package org.psawesome;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
