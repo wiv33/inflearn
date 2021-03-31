@@ -1,8 +1,10 @@
 CREATE TABLE Member
 (
-    member_id bigint PRIMARY KEY,
+    id bigint auto_increment,
     name      VARCHAR(255),
-    address   VARCHAR(255)
+    address   VARCHAR(255),
+    PRIMARY KEY ( id ),
+    UNIQUE (name)
 );
 
 

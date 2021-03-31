@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 
 public interface MemberRepository extends ReactiveCrudRepository<Member, Long> {
 
-    @Query("select * from Member where name = :name")
+    @Query("select * from Member where name = $1")
     Flux<Member> findByName(String name);
 
 }

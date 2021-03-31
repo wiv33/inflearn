@@ -18,7 +18,8 @@ public class MemberService {
      * @return member
      */
     public Mono<Member> join(Member member) {
-        return this.memberRepository.existsById(member.getMemberId())
+        return this.memberRepository.findByName(member.getName())
+                .hasElements()
                 .flatMap(hasEl -> hasEl ?
                         Mono.error(new IllegalArgumentException("이미 존재하는 계정입니다.")) :
                         this.memberRepository.save(member))

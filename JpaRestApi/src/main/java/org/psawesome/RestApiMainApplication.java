@@ -2,6 +2,7 @@ package org.psawesome;
 
 import io.r2dbc.spi.ConnectionFactories;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.psawesome.domain.Member;
 import org.psawesome.repo.MemberRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@Slf4j
 public class RestApiMainApplication {
 
     public static void main(String[] args) {
@@ -26,6 +28,7 @@ public class RestApiMainApplication {
     @Bean
     CommandLineRunner initMemberRepository() {
         return args -> {
+            log.info("start insert all");
             memberRepository.saveAll(List.of(
                     Member.builder().name("john").build(),
                     Member.builder().name("matilda").build())
