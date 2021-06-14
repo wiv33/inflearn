@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost:1521/jpashop;MVCC=TRUE
+    url: jdbc:p6spy:h2:tcp://localhost:1521/jpashop;MVCC=TRUE
     username: sa
     password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
 
   jpa:
     hibernate:
@@ -18,4 +18,5 @@ logging:
   level:
 #    logger
     org.hibernate.SQL: debug
+    reactor: trace
 #    org.hibernate.type: trace

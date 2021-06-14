@@ -1,18 +1,28 @@
 package org.psawesome;
 
+import lombok.RequiredArgsConstructor;
+import org.psawesome.domain.Member;
+import org.psawesome.repo.MemberRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.reactive.result.view.Rendering;
 import reactor.core.publisher.Mono;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    @RequestMapping("/hello")
-    public Mono<Rendering> homePage() {
-        return Mono.just(Rendering.view("hello")
-                .modelAttribute("data", "Hello World!!")
-                .build()
-        );
+    private final MemberRepository memberRepository;
+
+    @RequestMapping("/hello/{memberId}")
+    public Mono<String> homePage(Model model, @PathVariable Long memberId) {
+        model.addAttribute("data", memberRepository.findById(memberId)
+                                                   .log("find Member :: ")
+                                                   .defaultIfEmpty(Member.builder()
+                                                                         .id(3L)
+                                                                         .name("grade")
+                                                                         .build()));
+        return Mono.just("hello");
     }
 }
